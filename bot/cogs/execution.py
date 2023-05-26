@@ -112,7 +112,7 @@ class Execution(commands.Cog):
             otherwise it creates an embed for the output and sends it in the same chat
         """
 
-        if code == None:
+        if code is None:
             await ctx.send(embed=self.__create_how_to_pass_embed(lang))
             await ctx.message.add_reaction(Emoji.Execution.idle)
             return
@@ -197,9 +197,7 @@ class Execution(commands.Cog):
         for each in (stdout, stderr, compile_output):
             if each:
                 output += base64.b64decode(each.encode()).decode()
-        if not output:
-            return "No output"
-        return output
+        return "No output" if not output else output
     
     @staticmethod
     def resize_output_for_embed(output, embed, token):
@@ -208,13 +206,14 @@ class Execution(commands.Cog):
         Too large if it contains a lot of characters or a lot of new lines.
         This prevents abuse of large output which annoying for the users in the chat.
         """
-        if len(output) > 300 or output.count("\n") > 10:
+        if len(output) > 300 or len(output) <= 300 and output.count("\n") > 10:
             embed.description = f"Output too large - [Full output]({IDE_LINK}?{token})"
 
-            if output.count("\n") > 10:
-                output = "\n".join(output.split("\n")[:10]) + "\n(...)"
-            else:
-                output = output[:300] + "\n(...)"
+            output = (
+                "\n".join(output.split("\n")[:10]) + "\n(...)"
+                if output.count("\n") > 10
+                else output[:300] + "\n(...)"
+            )
         else:
             embed.description = f"Edit this code in an online IDE - [here]({IDE_LINK}?{token})"
 

@@ -101,8 +101,8 @@ class Information(commands.Cog):
     @commands.command()
     async def languages(self, ctx):
         """Sends a list of all supported languages."""
-        pages = list()
-        lang_ver = list()
+        pages = []
+        lang_ver = []
 
         for _, lang in LANGUAGES['array'].items():
             command = lang['command'] # eval(f"Lang.{lang}.command")

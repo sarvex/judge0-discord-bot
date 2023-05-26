@@ -102,7 +102,7 @@ class Admin(commands.Cog):
         for guild in self.bot.guilds:
             if guild.id == 620615182116323328:
                 for emoji in guild.emojis:
-                    print(str(emoji))
+                    print(emoji)
         
     @is_team_member()
     @commands.command()

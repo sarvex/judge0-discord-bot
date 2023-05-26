@@ -96,7 +96,7 @@ class Paginator:
                 self.paginating = False
                 for emoji in EMOJIS:
                     await self.message.remove_reaction(emoji, self.bot.user)
-                self.pages[self.index].set_footer(text=f"Session timed out")
+                self.pages[self.index].set_footer(text="Session timed out")
                 await self.message.edit(embed=self.pages[self.index])
             else:
                 await self.func()
@@ -104,10 +104,10 @@ class Paginator:
                     self.pages[self.index].set_footer(
                         text=f"Page {self.index + 1}/{len(self.pages)}"
                     )
-                    await self.message.edit(embed=self.pages[self.index])
                 else:
-                    self.pages[self.index].set_footer(text=f"Session closed")
-                    await self.message.edit(embed=self.pages[self.index])
+                    self.pages[self.index].set_footer(text="Session closed")
+
+                await self.message.edit(embed=self.pages[self.index])
 
     async def wait_first(self, *futures):
         """Wait for reaction add or reaction remove."""
