@@ -9,7 +9,7 @@ discord-py = "~=1.7"
 [dev-packages]
 flake8 = "~=3.9"
 flake8-annotations = "~=1.0"
-flake8-bugbear = "~=19.8"
+flake8-bugbear = "~=23.3"
 flake8-docstrings = "~=1.4"
 flake8-import-order = "~=0.18"
 flake8-string-format = "~=0.2"
